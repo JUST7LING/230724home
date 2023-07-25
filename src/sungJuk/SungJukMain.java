@@ -6,11 +6,11 @@ public class SungJukMain {
 
 	public static void main(String[] args) {
 
-		SungJukService sjs = new SungJukService();
+		SungJukService sungJukService = new SungJukService();
 				
 		while(true) {
 			try {
-				sjs.menu();
+				sungJukService.menu();
 				break;
 			}catch(InputMismatchException e) {
 				System.out.println("번호를 정확히 입력해 주세요."); 

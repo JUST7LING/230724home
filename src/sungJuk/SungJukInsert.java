@@ -4,22 +4,20 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class SungJukInsert{
+public class SungJukInsert implements SungJuk{
 
 	static ArrayList<SungJukDTO> arrayList = new ArrayList<>();
+	static SungJukDTO sungJukDTO;
 	
 	public SungJukInsert() {
 
-		
-	}
-
-	public ArrayList<SungJukDTO> getDTO() throws InputMismatchException{
 		int no;
 		int kor = 0;
 		int eng = 0;
 		int math = 0;
 		String name;
-
+		SungJuk sungJuk = null;
+		// 기본 
 		Scanner scanner = new Scanner(System.in);
 		System.out.print("번호 입력 : ");
 		no = scanner.nextInt();
@@ -61,18 +59,17 @@ public class SungJukInsert{
 				break;
 		}
 		
-		SungJukDTO pre = new SungJukDTO();
-		int tot = pre.calc(kor, eng, math);
-		double avg = pre.calc(tot);
-
-		SungJukDTO dto = new SungJukDTO(no, name, kor, eng, math, tot, avg);
-		
-		arrayList.add(dto);
-		System.out.println("입력되었습니다.");
-		System.out.println();
-		return arrayList;
-		
+		sungJukDTO = new SungJukDTO(no, name, kor, eng, math);
+		sungJukDTO.calc();
 		
 	}
-
+	
+	@Override
+	public void execute(ArrayList<SungJukDTO> arrayList) {
+		
+		arrayList.add(sungJukDTO);
+		System.out.println("입력되었습니다.");
+		System.out.println();
+	}
+	
 }

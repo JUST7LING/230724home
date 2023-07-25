@@ -9,13 +9,17 @@ public class SungJukService {
 	 		= new ArrayList<SungJukDTO>();
 
 	public void menu() throws InputMismatchException{
+		
 		Scanner scanner = new Scanner(System.in);
 		int cont = 0;
-
+		SungJuk sungJuk = null;
 		while(cont!= 6) {
 			System.out.println("************************");
 			System.out.println("\t1. 입력");
 			System.out.println("\t2. 출력");
+			System.out.println("\t3. 수정");
+			System.out.println("\t4. 삭제");
+			System.out.println("\t5. 정렬");
 			System.out.println("\t6. 종료");
 			System.out.println("************************");
 			System.out.print("번호 : ");
@@ -24,21 +28,31 @@ public class SungJukService {
 			if(cont==6) break;
 			switch(cont) {
 			
-			case 1: try { // getDTO() method throws Exception
-					SungJukInsert insert = new SungJukInsert();
-					arrayList = insert.getDTO(); // 입력한 정보를 가져온 것
+			case 1: try {
+						sungJuk = new SungJukInsert();
 					}catch(Exception e) {
-						System.err.println("잘못된 입력값입니다.");
+						System.out.println("잘못된 입력값입니다.");
 					}break;
 
-			case 2: SungJukList list = new SungJukList();
-					list.execute(arrayList);
+			case 2:	sungJuk = new SungJukList();
 					break;
-
-			default: System.err.println("값이 잘못되었습니다.");
+					
+			case 3: sungJuk = new SungJukUpdate();
+					break;
+					
+			case 4: sungJuk = new SungJukDelete();
+					break;
+					
+			case 5: sungJuk = new SungJukSort();
+					break;
+				
+			default: System.out.println("값이 잘못되었습니다.");
 					 continue;
-			}
+			}// switch
+			
+			sungJuk.execute(arrayList);
 
 		}// while
 	}
+
 }
